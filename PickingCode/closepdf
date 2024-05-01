@@ -1,0 +1,12 @@
+#! /bin/zsh
+#
+# Close all open .pdf in Mac Preview and clear cache.
+#
+# Usage: closepdf
+#
+# Author: Joel D. Simon
+# Contact: jdsimon@alumni.princeton.edu | joeldsimon@gmail.com
+# Last modified: 19-Apr-2024, Darwin Kernel Version 18.7.0
+
+rm -rf ~/Library/Containers/com.apple.Preview/Data/Library/Saved\ Application\ State/com.apple.Preview.savedState/
+killall Preview

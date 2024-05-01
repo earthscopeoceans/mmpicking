@@ -1,0 +1,22 @@
+# This script assumes you have directory ~/bin/ in your $PATH,
+# that the sac library is /usr/local/sac/lib/libsacio.a 
+# (originally on my Mac   /usr/local/lib/libsacio_bsd.a,
+# as for silicon Mac (I downloaded that from 
+# https://github.com/savage13/sacio, perhaps yours is instead
+# /usr/local/lib/sacio.a)
+# and that your fortran compiler is gfortran.
+# Change any of these if your configuration is different.
+
+gfortran -g -c mod_ttak135.f90 
+gfortran -g -o ~/bin/picklist picklist.f90 delaz.f90 /usr/local/sac/lib/libsacio.a 
+gfortran -g -o ~/bin/pickhelp pickhelp.f90 mod_ttak135.o /usr/local/sac/lib/libsacio.a
+gfortran -g -o ~/bin/rdapf2 rdapf2.f90 delaz.f90 timedel.f90 /usr/local/sac/lib/libsacio.a
+gfortran -g -o ~/bin/pnext pnext.f90
+gfortran -g -o ~/bin/pltres pltres.f90 delaz.f90 mod_ttak135.o
+gfortran -g -o ~/bin/pointa pointa.f90 timedel.f90 mod_ttak135.o -g -w /usr/local/sac/lib/libsacio.a
+
+ln -s mkdoppk ~/bin/
+ln -s dopick ~/bin/
+ln -s mkmoreppk ~/bin/
+ln -s pause ~/bin/
+

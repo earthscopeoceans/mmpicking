@@ -1,0 +1,45 @@
+#!/bin/csh 
+
+# creates sac macro doppk for ppk calls 
+
+set jul = `head -1 quake`
+@ year = $jul[1]
+
+echo 'oapf name' > doppk
+echo 'fileid type list kstnm gcarc az' >> doppk
+echo 'fileid location UL' >> doppk
+
+# get files in order convenient for picking
+set a = `picklist *.SAC *.sac`
+
+# picks
+echo window 1 xsize 0.01 0.5 ysize 0.2 0.96 >> doppk
+
+foreach file ( $a )
+  echo $file
+  echo r $file >> doppk
+  echo 'IF &1,GCARC LT 20' >> doppk
+  echo 'xlim t0 -6 t0 +16' >> doppk
+  echo 'ELSE' >> doppk
+  echo 'xlim t0 -6 t0 +10' >> doppk
+  echo 'ENDIF' >> doppk
+  echo hp co 1 >> doppk
+  echo r more $file >> doppk
+  echo ch ka A >> doppk
+  echo ppk perplot 2 >> doppk
+  echo wh >> doppk
+end  
+
+echo capf >> doppk
+echo "Message 'APF file was closed with CAPF. You must open it again if you'" >> doppk
+echo "Message 'wish to continue, by typing OAPF NAME'" >> doppk
+echo quit >> doppk
+
+echo ' '
+echo 'your SAC macro is called doppk and windowing is around marker t0.'
+echo 'From sac use this macro to do the picking by typing A for pick'
+echo '  and N to move on to next seismogram in the list'
+
+echo ' '
+echo 'After picking check/edit file APF and then run mm2rd to produce '
+echo '  input for raytracing program raydata5.'
