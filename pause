@@ -1,3 +1,0 @@
-#! /bin/csh
-echo -n 'Pause: '
-set aut = $<:q
