@@ -1,0 +1,323 @@
+NOTES
+
+General remarks:
+================
+
+Often the high-pass (hp) shows a sharper onset somewhat earlier of
+later than the unfiltered record. 
+
+In that case I usually assume that the microseismic noise has moved
+the onset a bit away from its arrival and prefer to trust the hp
+record. 
+
+Except when the onset itself has no high frequencies, so that the 1 Hz
+high pass is not the best one (often for shallow quakes).  
+
+I sometimes openen up a second window to se what a 0.5 Hz hi-pass would
+do. If so I edit the doppk file to have <hp co 0.5> before hitting <r>
+to repeat the picking.
+
+If the onsets are ambiguous, it often helps to plot close stations in
+a seperate window using SAC's <p1 rel> command and study the coherence
+of possible onset polarity.
+
+It also helps to plot records in a separate terminal window over a
+larger time window, e.g. using SAC: xlim t0 -20 t0 +10 to have a
+better view of pre-onset noise before picking.
+
+Clarification: 
+==============
+
+JDS: Are you saying that the microseismic noise can “drown out” (be
+bigger than) the arrival in the unfiltered record?  I don’t understand
+the phrase “...microseismic noise has moved the onset a bit…”.
+
+GN: As for Joel’s question about microseismic noise and displacement
+of the peak, think of noise sin(w1*t) with amplitude 1 and superimpose
+a signal eps*sin(w2*t+phi) with small amplitude eps and frequency
+w2>>w1.
+
+The sin(w1*t) will have a slope at the point where the small signal
+has a maximum. So the peak of the sum of the two will be displaced. If
+the *onset* is sharp, the onset itself can not be displaced. But if
+you cannot spot an onset, your eye will be guided by the small wiggle
+and intuitively trace back from a peak. If the slope is large, you
+wouldn’t even see a small local peak but just an inflexion.  By the
+way, I noticed AIC is powerful in noticing those inflexions and used
+it often to guide my eye.
+
+This situation is usually improved by picking from the high-passed
+record, provided there is enough signal power > 1 Hz. The mkdoppk
+script that I wrote created the SAC macro doppk which plots a
+high-passed version above the unfiltered record, so you have the
+choice where to pick.
+
+Small magnitude events usually have enough power > 1 Hz, larger
+crustal events not. I have been able to accept many picks from deep
+events in the M4 range, but had to reject picks of crustal events in
+the M5 range.
+
+As I wrote before, the only disadvantage of picking the hp record is
+that the pick is not stored in the header as pointer “A”.  This
+pointer is not used anywhere but comes in handy when you wish to check
+at a later stage.  
+
+I wrote a little program pointa.f90 that can fix that by reading the
+APF file and writing it into the header of the SAC file. I’ll put that
+program in PickCode/ on ariel.
+
+
+Notes on some events:
+=====================
+
+20180907/Q00: The three with lowest azimuth GUMO WAKE and KWJN have
+large pP, not to be confused with P.  One must pick all DOWN, even if
+hp sometimes seems to go UP.  Skip FUNA, P08. I pick P9 and P10, P12
+on the hp, going Down.
+
+20180908/DATA/Q02: P09 is clearly in the UP, but MSVF may be wrongly
+predicted as it is near the nodal zone, as is P07, which I dare not
+pick. P09 is a bit of a gamble.  HNR has strong pPn but no pickable
+Pn.
+
+20180908/DATA/Q02: P12 is near node, as is P09 that shows strong
+pP. None of them have island records with close azimuth. The UP in HNR
+is not clear enough for pick.
+
+20180908/DATA/Q03: complicated radiation pattern, many near nodal
+plane.  Small onstes therefor to be expected with different
+polarity. Fortunately no pP to distract (depth 93km). Neither P08 nor
+P11 is very close. TAU not clear. I gambled and picked P11 on the
+downward onset 0.5s before F.
+
+20180909/DATA/Q00: radiation pattern is good predictor, but many
+records near nodal plane. I did not dare picking FUTU. P08, P09, P10
+is much earlier than F. P12 is predicted UP, but the swing at 340s is
+very late, so perhaps it is the swing just before F? P13 is not
+clear. P16 is predicted UP (like RAR and PPTF, both close), P17 is on
+the nodal plane, but there is no clear up ghost following the down F
+so I skip it (also because it is at large distance). P19 (hp down just
+before F) has an up ghost. Idem P20. Note the difference the high pass
+makes!
+
+20180910/DATA/Q01: CAN, NOUC, DZM, CTAO, PMG are all DOWN, as
+predicted, but for positive azimuth polarity is more ambiguous. FUNA,
+P06 and MSVF are predicated in the nodal zone, P08 is borderline -
+confusion with pP is likely. In fact, apparent onsets are much closer
+to pP or pPn in those stations. I decided to pick pP(n) instead, for
+which I widened the xlim in doppk. pP onset not clear in PMG, NOUC,
+CAN, FUNA, COYC which I did not pick. Renamed add_to_datafile.P18796
+add_to_pP_datafile.P18796.
+
+20180910/DATA/Q02: polarities at most stations as predicted except
+WAKE, FUT, P06 and P10 are near node, so up for grabs.
+
+20180911/DATA/Q00: all three close and esay to pick.
+
+20180915/DATA/Q00: predictions OK.
+
+20180924/DATA/Q00: predictions OK, all MM should have onset DOWN
+except P06.  SNZO is UP.
+
+20180926/DATA/Q00: P08 should be down, I therefore picked the small
+wiggle just before F.
+
+20180926/DATA/Q01: P06 should be up, P08 is near node, it looks like F
+picked it OK
+
+20180928/DATA/Q00: all Mermaids near nodal plane... WAKE not
+clear. The F in P09 is pP, not P. None of the MM were picked.
+
+20180928/DATA/Q00: stf shows foreshock about 6s before main rupture,
+polarity predictable. But little signs of a foreshock that early in
+the records. P11 must be up when compared to P10 and RAR, but up onset
+ambiguous. I decided 0.2s after F, which is followed after almost 2s
+by a ghost down. P24 also up, 1s before F.  UNW, JTS skipped.
+
+20180930/DATA/Q00: both P06 and P08 in nodal region. P06 is sharp, P08
+must probably go down like AFI (F seems right). TAOE is blue so I pick
+the small upswing.
+
+20181009/DATA/Q00: P06 is near node but close to red, so I pick the
+swing just before F, from the hp.
+
+20181010/DATA/Q00: P06 is in the blue, but I do not see a clear
+onset. Very uncertain in other stations also.
+
+20181010/DATA/Q00: weak event but som sharp onsets
+
+20181012/DATA/Q00: predictions not perfect, but MSVF, FUTU predict P06 down, 
+which is visible about 0.6s before F.
+
+20181013/DATA/Q00: Many stations near node around 140 azimuth. P06 has
+same azi as FUNA and FUTU, both UP even though predicted down. hp at
+0.5Hz seems to show F is right on the upswing.
+
+20181013/DATA/Q01: polarity predictions not very good. P06 is
+predicted UP like MSVF, but FUTU is closer and DOWN. AFI is close to
+P08 and down. I picked as F in P06.
+
+2018/20181016/DATA/Q00: P13 and P19 not picked, too uncertain (F got
+pP instead of P in P19).
+
+20181021/DATA/Q00: weak event but sharp onsets.
+
+20181023/DATA/Q00: idem, except for NOUK.
+
+20181024/DATA/Q00: idem
+
+20181024/DATA/Q01: danger of pP pick
+
+20181025/DATA/Q00: predictions OK: P08 up, P10 down, P09 near node (I
+picked down from the hp).
+
+20181026/DATA/Q00: it looks like we have sharp onsets here, I picked
+from the hp
+
+20181029/DATA/Q00: every onset is up and as predicted, but slightly
+emergent, take care not to pick too late. Also, the hp may filter out
+some of this low-frequency onset. P12 has F down, about 1s too early
+if picked from hp.  P10,P09 have correct polarity for F but hp shows
+onset 0.5s earlier. The hp seems to mask the upswing for P08 (the
+onset is emergent, thus lp), I skip it.
+
+20181030/DATA/Q00: polarity predictions OK (all up except CAN,TAU),
+the stf is clean but with dominant period of 2s risks being filtered
+out at hp. P06 is too noisy, no up onset visible. P11 idem. I pick P13
+3s before F, P16,P18 close to F. Tried hp at 0.5Hz, but no luck for
+P06 or P11 to see a positive onset like nearby island stations.
+
+2018/20181101/DATA/Q00: expect onset down on all record, except
+perhaps NNA.  Picked dwn on 18 and 19 even though followed by later up
+of larger amplitude.
+
+2018/20181102/DATA/Q00: all expected up except for DAV. F OK in P11,
+slightly late in P12, P13
+
+2018/20181102/DATA/Q00: Iffy, but picked P06 and P09.
+
+2018/20181103/DATA/Q01: sharp onset in MSVF is preceded by weaker
+signal, which I picked
+
+2018/20181104/DATA/Q00: expect all up.
+
+2018/20181110/DATA/Q00: Mermaids near node. No pick for P09, P10, P18,
+P06. MSVF is on node and shows pP but not P.
+
+2018/20181114/DATA/Q01: comparsion with island stations shows onset
+must be high frequency, in P06 just before F, picked from hp. I did
+not dare pick DZM.
+
+2018/20181116/DATA/Q00: nearby stations indicate P06 must be up. F is
+outlier and down, no clear onset so I skipped it.
+
+2018/20181118/DATA/Q00: Mermaids are mostly in the down onset zone,
+picked them from the hp, all slightly beforen F.
+
+2018/20181118/DATA/Q00: P06 is in nodal zone, no clear onset.
+
+2018/20181119/DATA/Q01: small but sharp onset allows pick of P06 and
+FUTU, MSVF, AFI (from hp).
+
+2018/20181120/DATA/Q00: not clear in P10, and too early in
+AFI. Skipped this event.
+
+2018/20181122/DATA/Q00: P06 must be up, just before F. DZM picked from
+hp.
+
+2018/20181123/DATA/Q00: I picked P06 up.
+
+2018/20181127/DATA/Q00: P08 and P09, P10 are in down region. Picked
+P10 from hp.  P06 is on the node but has clear down onset. FUNA must
+be up. NOUC must be down but is not clear.
+
+2018/20181127/DATA/Q01: did not pick TAU
+
+2018/20181127/DATA/Q02: picked P06 on down swing just before F.
+
+2018/20181127/DATA/Q03: P06 down as in FUZU
+
+2018/20181129/DATA/Q00: P08 must go down, I pick the drop alomst 3s
+after F.
+
+2018/20181130/DATA/Q00: all are predicted down. Both POHA and UNM show
+an emergent onset 2s before the sharp break, therefore I use rdapf2
+with a 2s tbias (after repeating picks). This is also the onset
+selected by F.
+
+2018/20181202/DATA/Q00: P06 predicted down, but near node and in
+reality clearly up.
+
+2018/20181202/DATA/Q02: P06 is near FUTU which is up. I think F is
+correct when viewed on hp.
+
+2018/20181202/DATA/Q03: picked AFI from hp.
+
+2018/20181205/DATA/Q01: Mw 7.5, so checking CTAO and CAN it seems
+there is an emergent onset at 1.3s before the sharper onset, predicted
+down for most except FUNA,FUTU and P06, and some are near node. AFI is
+near node and MSVF also, shows pP only. F is almost 4s late for
+P06. P08 sees pP but P not clear, P10, P12, P13, P17, P16, P21 picked
+from hp. P11, P21, P23 near node, not clear. After picking (and typing
+<n> to avoid automatic rdapf2) I redid apf2 manually with a larger
+error of 0.8 and tbias 1.4.
+
+2018/20181206/DATA/Q01: polarity predictions not very reliable near 50
+deg azimuth. P08 not clear near node.
+
+2018/20181207/DATA/Q00: P10 picked from hp just before F. MSVF has pP
+but not P.
+
+2018/20181211/DATA/Q00: all expected positive. Main shock is 5s after
+foreshock, that is the one picked (tbias 5s). P20, P21, P22 not clear,
+must be up when compared to nearby but no clear up onset
+visible. However, after plotting all mermaids using <P1 relative>
+there is a ppositive wiggle that lines up. I therefore repeated
+picking for these and used tbias 5s.  I manually changed the 0.57
+errors in the add_to file to 0.98 (adding st dev of 0.8 to 0.57)
+
+2018/20181213/DATA/Q00: too noisy, skipped
+
+2018/20181214/DATA/Q00: P06 is close enough to MSVF to warrant the
+upswing to be picked as onset, just before F.
+
+2018/20181216/DATA/Q00: most records at larger distances and in the
+red zone, but multiple stations show positive onset.  F seems to be a
+little too late for P06, P09 altoo early for P08. P10 ambiguous.  GUMO
+picked from hp.  Plotting using <p1 rel> with <hp 0.5> convinces me
+picking positve onsets is OK.  Before repeating the picking I edited
+doppk to high pass at 0.5 instead of 1, and changed my mind on a
+handful of onsets. However, I consider this event somewhat iffy and
+manually raised the error in add_to_datafile.P18879 to 0.98s.
+
+2018/20181218/DATA/Q01: polarity predictions not reliable (often
+contradicted by the FDSN stations).
+
+2018/20181219/DATA/Q00: RAR is in between PPTF (up) and MSVF (up) so
+should be up, FUTU too.  P18, P16, P17 predicted down, but too
+ambiguous to pick. P10 is clear (down) on the hp.
+
+2018/20181220/DATA/Q00: P06 has clear ghost after 2s on hp, and F
+seems on the spot.
+
+2018/20181220/DATA/Q01: too uncertain, skipped
+
+2018/20181220/DATA/Q02: all predicted down but near azi 130 many are
+up. Main shock about 2-3s after weak onset. F in P06, P08, P09 is too
+late but onset of main is emergent and thus not very accurate. P17
+picked from hp. Before hitting repeat, edited doppk to hp at 0.5 Hz,
+which helped confirm pick for P06. Changed error in
+add_to_datafile.P18886 to 0.98.
+
+2018/20181222/DATA/Q00: P06 not clear, F picks with residue of 13s
+(pP? arrives after 8s). Nor did I dare pick P09.
+
+2018/20181223/DATA/Q00: strong quake at depth but many onsets
+ambiguous.  Mermaids should go up, but stronger swing is often
+down. After plotting mermaids over larger window I saw that F usually
+picks near an up, so I repeteated the picking with that in mind and
+added some that I earlier considered ambiguous. F does a good job
+here.
+
+2018/20181226/DATA/Q01: polarity prediction wrong for HNR, P06 on
+node. P12 not clear, should go down like PPTF.

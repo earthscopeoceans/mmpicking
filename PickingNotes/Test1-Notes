@@ -1,0 +1,77 @@
+20180928 - weak foreshock, main shock about 6s later. sizas.pdf shows low amplitudes
+for almost all stations, starting down. Several nearby stations such as KWJN, HNR,
+PMG start down, but the polarity of the inflexion 6s later seems to go up in PMG,
+NOUC, MSVF. Mermaids are very ambiguous.
+
+pP comes in after 7.2s in the Mermaids. Separate SAC plot of MSVF,
+FUTU, and Mermaids (all at azi 100-110) shows no clear onset in the
+Mermaids, and often ambiguous ones in land stations. I rejected the
+event because without the Mermaids there is only duplicate information
+to be expected.
+
+20211214 - P48 and P49 seem to have a visible onset. It is late but all are late.
+
+The stf shows complicated rupture with multiple shocks, but no weak
+foreshock. Polarity should be down (followed by up pP after ~4s, but
+that is when the 2nd shock kicks in) excepth perhaps for 20<azi<100
+(GUMO-HNR).  DAV, NOUC I didn't dare pick.
+
+DZM is up, even though predicted down. Are we seeing pP here all the
+time?  I started to doubt the earlier readings as being pP (and that
+is why they are so late). so I typed <r> to repeat and check (with
+tbias=0 on the basis of the stf plot). Note that this erases the
+add_to file you every pick has to be redone.  The plot of delays looks
+coherent, so I decided to accept this event.
+
+20180819 - the map plot of Mermaids made me fear the worst! Plotting them
+with <xlim t0 -20 t0 +20> (to get a better view od noise level than in the pplt
+plots) and <p1 rel> shows possible onsets in P07,09 and 10.
+This time depth is 29 km, so hopefully no interference with pP (9s after P).
+POlariry should be UP except for DAV.
+P07,08 is picked from the hp, just before F, P10, P11 also but at F. Residu
+plot looks coherent, with PMG and HNR influenced by fast subduction zones. Accept.
+
+20180805 - Polarities are wll predicted, all up except DAV. We are now looking at
+somwehat lower magnitudes and the Mermaids clearly benefit from the higher
+frequency. I did not dare pick noisy FUNA. PAYG is at 152 deg, the signal looks
+like a local but is in reality PKPdf (predicted at 1185.4s). No need to pick it
+(it would need its own add_to file as PKP, information is already in ISC data).
+Same for OTAV,JTS,HDC. Residu plot OK: Accept.
+
+20190412 - polarity evenly divided between down at azi<120 and up > 120, except DAV.
+N01, P10 and 11 are in nodal plane, not sure I can pick them, so I made
+a sac plot in a separate terminal using <xlim t0 -20 t0 +20> and <p1 rel>
+with them and nearby AFI, MSVF. AFI and MSVF shows P down with delay of 3s.
+It seems F picks the pP wave, no suprise a P is in the nodal plane. hp does not
+help. Foreshock 4s before main gives extra complications. I rejected this event.
+
+20190714 - polarity up except DAV, and CTAO, MSVF P10 in nodal plane.
+P10 has no clear onset (F picks pP which is early). Reject since the only
+Mermaid did not allow picking.
+
+20190122 - stf seems OK, good for hp. P06 is near nodal plane, on hp F
+picks it slightly late. Residu plot OK. Accept.
+
+20210726 - polarity all strong down except DAV. Depth 11 km so watch
+out for mixup with pP. Separate plot of P11 and P48 with NOUC and DZM
+shows similar weak down onset in both mermaids just before pP. Accept.
+
+20200318 - polarity down, DAV in nodal plane. I compared XMAS and P29 in separate
+plot, both show pP but no clear P -> no Mermaid data -> Reject.
+
+20210114 - polarity up everywhere. Nice stf. But h=18 km, pP mixup possible.
+P29 shows ghost after 2s. P48 goes up at 615.7 and their is a hint of a ghost
+when the upward swing at 617.5 in interrupted just after that, so I trust my pick
+even though it is ambiguous. I dare not pick P49. In the residu plot it looks like
+SNZO is picked too early, so I checked it again with sac but it looks fine. Accept.
+
+20221206 - only one Mermaid (P10), at large distance, predicted onset down. Nice
+stf which should allow for hp. I picked the small down wiggle just before pP
+(and confirmed it by hp at 0.3 Hz in separate plot). All 4 residues are pretty
+late, but this event is south of the subduction zone so rays are not speeded up.
+Accept.
+
+20220221/ - polarities all up. Only one mermaid P53 (how come we have numbers >49?).
+M53 onset is visible after F, just before pP, on the unfiltered record. Accept.
+
+THE END (total time: 95 minutes).
