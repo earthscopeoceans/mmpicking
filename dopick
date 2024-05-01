@@ -1,0 +1,98 @@
+#! /bin/csh
+
+echo ' '
+echo '------------------------------------------------------------'  
+echo Running PPK on             $argv[1]
+cd $argv[1]
+cat quake
+gv smap.pdf
+pause
+gv pmap.pdf
+pause
+gv sisaz.pdf
+pause
+gv pplt1.pdf
+pause
+if(-e pplt2.pdf) then
+  gv pplt2.pdf
+  pause
+endif  
+if(-e pplt3.pdf) then
+  gv pplt3.pdf
+  pause
+endif  
+if(-e stf.pdf) then
+  gv stf.pdf
+  endif
+endif  
+
+mkdoppk
+/usr/local/sac/bin/sac doppk
+
+#vi APF
+echo 'end of:'
+pwd
+echo '----------------------------------------------------------------'
+echo -n '[n]ext event, give nonzero [t]bias, or [r]epeat? '
+set ans = $<:q
+if ($ans == 'n') then
+  rdapf2 P 0.4 
+  vi add_to_datafile*
+  pointa
+  pltres add_to_datafile*
+  exit
+else if($ans == 't') then
+  echo -n 'Give tbias for rdapf2: '
+  set tbias = $<:q
+  rdapf2 P 0.4 $tbias
+  vi add_to_datafile*
+  pointa
+  pltres add_to_datafile*
+  exit
+else if($ans == 'r') then
+  echo -n 'Give tbias for rdapf2, or 0: '
+  set tbias = $<:q
+  rm add_to*
+  /usr/local/sac/bin/sac doppk
+  # vi APF
+  rdapf2 P 0.4 $tbias
+  vi add_to_datafile*
+  pointa
+  pltres add_to_datafile*
+  echo 'end of:'
+  pwd
+  echo '----------------------------------------------------------------'
+else  
+  echo -n 'You must answer either n,t or r, so please try again:'
+  set ans = $<:q
+  echo your answer is $ans
+  else if($ans == 't') then
+    echo -n 'Give tbias for rdapf2: '
+    set tbias = $<:q
+    rdapf2 P 0.4 $tbias
+    vi add_to_datafile*
+    pointa
+    pltres add_to_datafile*
+    exit
+  else if($ans == 'r') then
+    echo -n 'Give tbias for rdapf2, or 0: '
+    set tbias = $<:q
+    rm add_to*
+    /usr/local/sac/bin/sac doppk
+    # vi APF
+    rdapf2 P 0.4 $tbias
+    vi add_to_datafile*
+    pointa
+    pltres add_to_datafile*
+    echo 'end of:'
+    pwd
+    echo '----------------------------------------------------------------'
+    exit
+  else
+    echo 'I assume you meant <n>ext'
+    rdapf2 P 0.4 
+    vi add_to_datafile*
+    pointa
+    pltres add_to_datafile*
+  endif  
+endif  
