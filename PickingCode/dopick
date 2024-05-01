@@ -4,6 +4,13 @@ echo ' '
 echo '------------------------------------------------------------'  
 echo Running PPK on             $argv[1]
 cd $argv[1]
+if(-e APF) then
+  set a = `ls add_to_datafile.*[0-9] | wc`
+  if($a[1]>0) then
+    mv add_to_datafile.*[0-9] add_to_datafile.old
+    echo Existing add_to file was saved in add_to_datafile.old
+  endif
+endif  
 cat quake
 gv smap.pdf
 pause
@@ -37,9 +44,9 @@ echo -n '[n]ext event, give nonzero [t]bias, or [r]epeat? '
 set ans = $<:q
 if ($ans == 'n') then
   rdapf2 P 0.4 
-  vi add_to_datafile*
+  vi add_to_datafile*[0-9]
   pointa
-  pltres add_to_datafile*
+  pltres add_to_datafile*[0-9]
   exit
 else if($ans == 't') then
   echo -n 'Give tbias for rdapf2: '
@@ -47,18 +54,20 @@ else if($ans == 't') then
   rdapf2 P 0.4 $tbias
   vi add_to_datafile*
   pointa
-  pltres add_to_datafile*
+  pltres add_to_datafile*[0-9]
   exit
 else if($ans == 'r') then
   echo -n 'Give tbias for rdapf2, or 0: '
   set tbias = $<:q
+  rdapf2 P 0.4 $tbias
+  pointa
   rm add_to*
   /usr/local/sac/bin/sac doppk
   # vi APF
   rdapf2 P 0.4 $tbias
-  vi add_to_datafile*
+  vi add_to_datafile*[0-9]
   pointa
-  pltres add_to_datafile*
+  pltres add_to_datafile*[0-9]
   echo 'end of:'
   pwd
   echo '----------------------------------------------------------------'
@@ -66,13 +75,13 @@ else
   echo -n 'You must answer either n,t or r, so please try again:'
   set ans = $<:q
   echo your answer is $ans
-  else if($ans == 't') then
+  if($ans == 't') then
     echo -n 'Give tbias for rdapf2: '
     set tbias = $<:q
     rdapf2 P 0.4 $tbias
-    vi add_to_datafile*
+    vi add_to_datafile*[0-9]
     pointa
-    pltres add_to_datafile*
+    pltres add_to_datafile*[0-9]
     exit
   else if($ans == 'r') then
     echo -n 'Give tbias for rdapf2, or 0: '
@@ -81,9 +90,9 @@ else
     /usr/local/sac/bin/sac doppk
     # vi APF
     rdapf2 P 0.4 $tbias
-    vi add_to_datafile*
+    vi add_to_datafile*[0-9]
     pointa
-    pltres add_to_datafile*
+    pltres add_to_datafile*[0-9]
     echo 'end of:'
     pwd
     echo '----------------------------------------------------------------'
@@ -91,8 +100,8 @@ else
   else
     echo 'I assume you meant <n>ext'
     rdapf2 P 0.4 
-    vi add_to_datafile*
+    vi add_to_datafile*[0-9]
     pointa
-    pltres add_to_datafile*
+    pltres add_to_datafile*[0-9]
   endif  
 endif  
