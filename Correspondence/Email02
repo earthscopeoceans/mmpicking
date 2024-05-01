@@ -1,0 +1,15 @@
+2/14/2024
+
+I downloaded the source time functions as determined by SCARDEC from
+scardec.projects.sismo.ipgp.fr and added plots named 
+
+stf.pdf
+
+to the data directories on ariel.
+
+There are only stf’s for the strongest earthquakes, but in particular
+for those it may be helpful to see what was actually happening on the
+fault plane.
+
+Best wishes,
+Guust

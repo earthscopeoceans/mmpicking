@@ -1,0 +1,21 @@
+3/2/2024
+
+Dear all, 
+
+I just transferred the 2023 data to ariel, this is now complete. I
+also fixed the few directories that had a wrong event depth.
+
+And finally, I added the predicted time for pPn to the SAC headers (if
+it exists). This was needed because SAC’s traveltime command does not
+adhere to the official nomenclature and labels deep events ‘Pn’ in the
+near field. I also considered adding sP and sPn but decided not to do
+that, as it clutters the picking plot too much. However, should you
+wish to identify them, the following command adds them to the header:
+
+traveltime model ak135 verbose picks 4 phase sP sPn
+
+and if you follow this up with ‘wh’ it writes it permanently in the SAC file.
+
+Happy picking! I will try some myself as well before taking off on a trip to Lausanne.
+
+Guust

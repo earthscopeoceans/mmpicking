@@ -1,0 +1,17 @@
+2/10/2024
+
+I attach a version (mkdoppk2) that does a 1 Hz hi-pass for picking. Like mkdoppk 
+it creates a SAC macro named doppk.
+
+Contrary to what mkdoppk said, there is no need to move the APF file to APF.org 
+if you do a second round of picking on the same data set. So I edited that out 
+of mkdoppk and I attach both of them.
+
+
+Best wishes,
+
+Guust
+
+Frederik: the old file mkdopp was renamed mkdopp0
+
+

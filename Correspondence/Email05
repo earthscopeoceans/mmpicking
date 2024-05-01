@@ -1,0 +1,37 @@
+2/21/2024
+
+Dear all,
+
+Although I was always sceptical about the use of predicted polarity, I
+discovered that for the stronger events the SCARDEC double couple
+solutions may do a better job for us (probably because they were
+derived from the high frequency P waves rather than the low-frequency
+CMT solutions). See scardec.projects.sismo.ipgp.fr
+
+I therefore redid the sisav.pdf plots. 
+
+They may now include predicted polarity as background colour
+(red=down, blue=up) from SCARDEC for the larger events, and CMT for
+the smaller ones, if available.
+
+I created them with a script, have not had the time to check them all, so be careful:
+
+[1] for crustal events at close distance, the prediction may be wrong
+since the ray angle at the source may be off,
+
+[2] check if the low-noise stations have the polarity correctly
+predicted before accepting them for the noisier ones.
+
+I think the new plots may be very helpful to pick onsets correctly for
+the noisier records whenever there is an ambiguity.
+
+If there is a source time function file stf.pdf in the Qnn/ directory,
+this means the prediction is based on SCARDEC. If not, from
+ds.iris.edu/spud/momenttensor and out.CMT gives the detailed tensor
+(zero if not available).
+
+I attach an example sisaz.pdf
+
+best wishes,
+
+Guust

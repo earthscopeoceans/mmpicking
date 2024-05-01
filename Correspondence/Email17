@@ -1,0 +1,15 @@
+dta.pdf
+
+I compared the out.pointa files. The file out.cfam has all readings
+(translated into residual dta) for files that have been picked by more
+than one person. 
+
+The plot dta.pdf shows these picks as blue dots, the averages as red
+triangles. 
+
+Finally, out.pointa.combined has the pointa files grouped by event.
+
+There are some major differences, exceeding what I expected! Please
+have a look.
+
+Guust

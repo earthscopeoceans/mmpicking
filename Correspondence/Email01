@@ -1,0 +1,35 @@
+2/3/2024
+
+Dear all,
+
+I assembled the Mermaid data (with updated hypocentres and origin times) and 
+relevant FDSN island stations plus plots for 2018...
+
+A description is in the PDF... and SAC picking scripts + some processing
+software...
+
+It took me some time to filter the FDSN data to a useful quantity, but
+I chose enough to
+
+(1) allow for a quick view of the waveform of the onset and 
+
+(2) to use them in combination with Mermaid data for an origin time
+correction. 
+
+After reflection I think correcting just the time and not the
+hypocentre is the best strategy to follow for the inversion, but we
+can discuss this also with the other SPPIM participants. 
+
+The flipside is that we need to pick a dozen or so island station
+records in addition to the Mermaids.
+
+The file SPPIMdata.pdf describes how I do that.
+
+You probably have your own programs for picking but please try the SAC
+macro ‘doppk’ that is created by ‘mkdoppk’ for each event and see if
+that works for you. If not, let us communicate how you can put your
+results in a format like that of rdapf2 which post-processes the SAC
+output such that it can be combined into input for my inversion
+software.
+
+Guust

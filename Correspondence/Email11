@@ -1,0 +1,24 @@
+3/18/2024
+
+Dear all,
+
+I finished picking the records of about 1000 records until the end of 2018. The 
+results are in the file .pointa.
+
+It takes me about an hour to do 10 events, depending on how many
+complicated records there are for an event. Some events are picked in
+just 2 or 3 minutes, others require some experimenting with
+filtering. The bottom line is that it will take about 300 man-hours to
+do the full data set.
+
+The AIC picks (F) offer a very good guide to the onset but are generally later 
+than the picks by eye (A). The histogram is highest for a difference of 0.2s, 
+the largest differences for shallow events. Here are three plots:
+
+While picking I kept notes on most of the seismograms, which I attach below.
+
+Best wishes,
+Guust
+
+
+Frederik: See PickingNotes

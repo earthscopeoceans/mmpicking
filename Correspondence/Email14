@@ -1,0 +1,18 @@
+March 4
+
+Dear all,
+
+I just ftp’d a series of plots into the 2023 data directory of ariel —
+I had not noticed that one tar file with plots never made it across
+the ocean when I transferred data last month. So if you made a copy of
+the data on your machine, please re-copy all of 2023, that is the
+easiest.
+
+Also, when you pick and you notice that there is no global plot with
+island stations, this means that there were no low-noise island
+station records for that event. You can skip such events since this
+very likely means its mermaid data are not very reliable either.
+
+Best wishes,
+
+Guust

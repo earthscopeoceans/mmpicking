@@ -1,0 +1,42 @@
+April 19, 2024
+Guust -> Joel
+
+Oh, and a few questions/notes from this round:
+
+[1] On polarity plot is the reference for up/down the start of the trace? See
+    for example 2023 287 6:34:10 sisaz.pdf, where RAO in red and blue.
+
+AK135 predicts the onset at the time of the small circle on the
+trace, so the up/down should be close to this circle. The circle is
+plotted at the distance/azimuth of the station
+
+[2] Where is P0040 on 2021 263 18:08:17 sisaz.pdf / MERMAIDs on smap.pdf
+    (MERMAID also missing from smap.pdf for 2022 38 06:01:20, and I think I
+    noticed others as well)
+
+The seismogram is there, but the label P0040 falls outside of the plot
+(I void overprinting of labels by moving them higher than the previous
+one).
+
+[3] Accidentally didn't answer question after picking; answered repeat
+    question with "n" and it did not open pick file in vi, generate
+    add_to* file, nor update out.pointa
+
+You can only <r>epeat once with script <dopick>. If you decide you
+wish to redo you should type the command by hand, e.g.:
+
+dopick 2022/20220207/DATA/Q01
+
+without using pnext. Be sure not to erase the APF file (unless you
+really wish to start from scratch).
+
+All the best
+
+Guust
+
+PS to ALL: I have just assembled all add_to files and done the
+raytracing for an inversion to see how many outliers we have. I should
+have some results by the time we start the Zoom
+
+
+

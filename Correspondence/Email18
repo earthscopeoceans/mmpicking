@@ -1,0 +1,22 @@
+dtgsn.pdf
+
+Here is another plot. I grouped the residuals by station for the GSN
+data. If all events were at exactly the same place, all dta for one
+station should be the same. There is a spread because raypaths sample
+different regions of the earth.
+
+If we assume that the ’true’ spread is accurately depicted by the that
+in low-noise Australian stations CAN,CTAO,TAU, SNZO in New Zealand and
+MSVF on the large island of Fiji, then the admissible spread would be
+of the order of 2 seconds. 
+
+In many island stations it is clearly larger. So our differences are
+strongly influenced by noise levels. It is a warning not to pick when
+noise amplitude is high.
+
+A similar plot cannot be made for the Mermaids because they change
+position all the time.
+
+Best wishes,
+
+Guust

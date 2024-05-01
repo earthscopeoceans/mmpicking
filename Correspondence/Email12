@@ -1,0 +1,6 @@
+Voor Mermaids vergelijk kolom dta van de diverse pickers, Voor de rest
+vergelijk kolom tf.  
+
+In beide gevallen is het het residu: A minus Tak135 (waarbij Tak135
+een lineaire interpolatie is uit de officiele AK135 tabel, dit om
+complicaties met triplicaties te vermijden).

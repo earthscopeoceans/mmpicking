@@ -1,0 +1,26 @@
+2/22/2024
+
+Dear all,
+
+I hope AGU was exciting.
+
+While assembling the data sets on nolet@ariel, I noticed the
+similarity of the seismograms of closely spaced events. This may help
+in picking, certainly if one starts with the stronger events in one
+cluster and move down to the smaller magnitudes.
+
+I therefore computed a list of clusters. In the home directory, you’ll
+find two files: CRUSTClusters and DEEPClusters, which list 49 clusters
+each for crustal- and deep events respectively. Within each cluster,
+events are ranked from high to low magnitude (2nd column). At the end
+of each file I also list the directories chronologically.
+
+The idea is that, when we divide up the work, we should assign
+*clusters* to the participants.
+
+I am halfway 2021 in assembling data sets & plots, hope to get it done
+before I travel for a week March 3-10.
+
+Best wishes,
+
+Guust

@@ -1,0 +1,9 @@
+The last version of dopick had a small bug that appears if you did not type <n> 
+or <t> and <r> and it asks you to type
+that again - in which case it would not create the add_to file. Here is the 
+correct version:
+
+
+If this happened to you and the add_to file is missing you can create it by hand 
+in the Qnn/ directory by typing:
+rdapf2 P 0.4

@@ -1,0 +1,27 @@
+2/26/2024
+
+Dear all,
+
+I noticed that the time window hardwired in doppk (-6 to +10s after P) is too 
+small, as there are sometimes very large delays at shorter distances (see 
+example plot where the upper mantle is about 10% slow over a distance of 7.9 
+degree).
+
+I therefore widened to window in case the distance is less than 20 degrees to 
++20s after P.  I also now show a high-passed
+version on top and a low-passed version below. You can click on either one of 
+them to pick the onset, whichever is the better one.
+
+If you need more precision, there is now also a script mkmoreppk. You call it 
+separately for each seismogram that you wish to zoom, with the (negative) head 
+and the positive tail, e.g.:
+
+mkmoreppk -6 +12 II.MSVF*
+
+and it will restrict the window to [t0-6,t0+12] in this case. It will add the 
+new reading to APF; if there was an older reading it will be ignored by rdapf2.
+
+
+Best wises,
+
+Guust

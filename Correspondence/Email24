@@ -1,0 +1,15 @@
+The crust cluster #2 has a few hard choices… Again, if no Mermaid is pickable 
+because of noise, just reject that event and erase the add_to file. I am 
+currently working at it and find that I often need to look at a larger window to 
+judge the noise level. I prefer
+to do this in a separate window, but the alternative is to widen a bit the 
+window in script <mkdoppk>. If you feel like experimenting, change the lower 
+limit of line 22 and 24 from -6 to, say, -15, e.g.:
+
+  22   echo 'xlim t0 -15 t0 +16' >> doppk
+  23   echo 'ELSE' >> doppk
+  24   echo 'xlim t0 -15 t0 +10' >> doppk
+  25   echo 'ENDIF' >> doppk
+
+Best wishes,
+Guust

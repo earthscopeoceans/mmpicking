@@ -1,0 +1,117 @@
+Dear Joel,
+
+In response to your questions:
+
+[1] I am used to scripting in csh even though Mac now uses zsh, but I have never 
+noticed one must put aliases in .cshrc.
+
+It is worthwhile to get GMT, the new ‘modern’ version GMT6 is much more 
+user-friendly than GMT5 and extremely powerful .
+
+[2] Resize while picking. SAC allows resize of the windows with the WINDOW 
+command (type: help window).
+
+If you wish to change the window for picking, that has to be inserted into doppk
+which is written by mkdoppk. For example, if you wish the window to have half 
+the size of your screen in both x- and y-direction, add this line to mkdoppk after
+echo 'oapf name' > doppk
+
+echo 'WINDOW 1 XSIZE 0.5 1.0 YSIZE 0 0.5' >> doppk
+
+(this will place the window in the upper left corner of your screen).
+
+(note the line reflects a correction by Guust)
+
+[3] abnormal X11 size: on my Mac the windows start with size 80x30 characters. 
+Do you have very large characters? Can you resize by hand (click on bottom right 
+corner and drag)?
+My Mac uses XQuartz, I am not sure what the difference is with X11, what does 
+yours have?
+
+[4] Absent F for 20180928/Q00? I checked ariel, the *.sac files do have F in the 
+header:
+[nolet@ariel Q00]$ sac
+   FILE: 20180928T101248.09_5BAE4C6A.MER.DET.WLT5.sac - 1
+  -------------------------------------------------
+      F = 6.904600e+02
+     FILE: 20180928T101307.10_5BAE4E32.MER.DET.WLT5.sac - 2
+  --------------------------------------------------
+      F = 7.164800e+02
+   FILE: 20180928T101416.12_5BAE4E14.MER.DET.WLT5.sac - 3
+  --------------------------------------------------
+      F = 7.660700e+02
+   FILE: 20180928T101434.25_5BAE4A90.MER.DET.WLT5.sac - 4
+  --------------------------------------------------
+      F = 7.978700e+02
+
+[5] The <r> for repeat does the following:
+- it erases the add_to file
+- it asks for tbias
+- it calls SAC with doppk
+- after the new picking it puts them into header variable A
+- it exits
+So you should not get a second chance to do <r>. If you decide you wish to redo
+the picks, follow Frederik's suggestion and start from scratch. That also avoids
+that old A values remain in the header for records you decide not to pick on 
+second thought.
+Note: script dopick asks for <n>,<t> or <r>, but in effect any character you type
+other than <n> or <t> will revert to <r> as default. It has happened that I hit the
+wrong key, so that the add_to file was erased and I was forced to pick again.
+
+[6] When to decide on tbias - good question because there is room for debate. The
+idea is that a small foreshock may only be visible in stations near the quake, 
+bu drown in the noise at larger distance. So I do two things:
+- I check the stf.pdf plot to see if there is a foreshock much smaller than the 
+main break. Since the problem only occurs for large events (M>7, say) there is 
+usually a stf plot. If the foreshock has less than, say 10-15% of the size of
+the next, there is the danger that your pick in many stations and mermaids may 
+be the second shock rather than the first
+- I then verify the shape of the onset in nearby and far stations to see if there
+is a difference.
+- ONLY if I see a foreshock in the nearby stations and NOT further down the
+epicentral distance road do I apply a tbias (that one I can easily read from the
+stf.pdf plot).
+Note: this rarely happens, so do not worry too much about it.
+
+[7] Yes, pnext moves up the <exit> line in the <rundopicks> file when you call it,
+and does not check if you abandoned picking. You have to move it one line back 
+by hand if this happens.
+
+[8] see answer to [5]
+
+[9] When I say I reject an event it means I erase the add_to file. This may happen
+after I have done some picking and abandon it on second thought.
+
+[10] If there is no add_to file for the event it will never enter into the 
+inversion. If there is one, I have not envisaged a filter to remove those
+without mermaids. It could be done but it is probably not needed. The island
+station data have probably many duplicated raypaths, and if the picks are good
+they just add little information. If they are wrong (e.g. you decide you picked pP
+instead of P) be sure to remove the add_to file.
+
+[11] see [5]: anything except <n> or <t> results in a repeat. I can change this 
+if it is a big problem, shall I?
+
+[12] The bias is not explicitly visible in the add_to file. It is simply 
+subtracted from the observed travel time in the add_to file.
+
+[13] I attach a blow-up of P06 for 20190122. On hindsight my pick at 600.4
+is a little early, it probably is closer to 600.5, while F (at 600.7) picks
+an inflexion that reduces the slope (for onsets I intuitively look for *increase*
+in slope). I dare pick it because the negative peak here has a higher frequency
+than the noise before and a larger negative amplitude. Also, by now I have seen
+many F picks that correctly identify the change in frequency content but that
+are 0.1-0.3s late -- which seems to be the case here.
+
+[14] 20220221/Q01: See p53.pdf and p53hp.pdf blow-ups. I noticed the onset must
+go UP. On the unfiltered record F sees the change in frequency content (extra
+wiggles on top of the noise) and goes up but without change in slope. My pick A
+is where slope goes from negative to positive, so I preferred this one. The
+high pass record confirms this: F does not even go up.
+
+Bottom line: try SAC command WINDOW for resizing, do not use tbias unless you 
+are absolutely sure it is needed.
+
+We can always have another zoom!
+
+END

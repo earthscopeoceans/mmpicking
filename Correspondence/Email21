@@ -1,0 +1,16 @@
+I discovered zoom with X does work on my Mac. You need to type X
+twice. Type <help plotpktable> and you see all the possible entries
+for ppk:
+
+x        Set Zoom window
+           - Set beginning of zoomed plot
+           - If x is second keystroke, set end of zoomed window and display
+           - If s is second keystroke, defined zoomed plot limits are saved
+             and used as xlims for subsequent plots
+o        Zoom Out => Displays previous plot window.
+           A maximum of five windows are saved.
+
+Best wishes,
+
+Guust
+

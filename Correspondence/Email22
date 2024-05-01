@@ -1,0 +1,43 @@
+Hi Yong,
+
+You solved it!
+
+The secret sauce, to get my picking window large and centered on my right screen —
+
+echowindow 1 xsize 0.40 0.95 ysize 0.45 0.9 >> doppk
+
+Thank you!
+
+All the best,
+
+Joel
+
+> Hi Joel,
+>
+> The window can not be resized during the PPK command as shown in your video, 
+> while the size could be adjusted when using P1 or P2.
+>
+> You could try to just modify the command line in mkdoppk:
+>
+> from
+>
+> # picks
+> echo window 1 xsize 0.01 0.5 ysize 0.2 0.96 >> doppk
+>
+> to
+> # picks
+> echo window 1 xsize 0.01 0.3 ysize 0.2 0.5 >> doppk
+>
+> The sac may regard your two screens as a single one.
+>
+>
+> Best wishes,
+> Yong
+
+> >> On Apr 20, 2024, at 00:04, Joel D. Simon <jdsimon@princeton.edu 
+> >> <mailto:jdsimon@princeton.edu>> wrote:
+> >>
+> >> Dear all,
+>  
+> >> Anyone else know how to adjust and/or hardcode the XQuartz window size in Mac?
+

@@ -1,0 +1,134 @@
+Joel D. Simon on  4/04/2024 15:53
+
+ramblings_notes_questions.txt
+
+[1] Must alias in csh:
+
+I'm working on a Mac in zsh.
+
+dopick/other picking codes seem to be written in csh.
+
+So I specifically had to add "alias gv /usr/bin/open" to ~/.cshrc.
+
+(the alias syntax is different between the two shells, hence I note it here)
+
+Also had to change hardcorded "/Users/auguste/data/..." in pointa.f90, like
+Frederik mentioned earlier.
+
+Finally I don't have GMT on my local machine so I had to comment all occurrences
+of pltres in dopick.
+
+After all these changes had to Compile_all again etc.
+
+[2] SAC error for window resize:
+
+My x11 window for the actual pick opens on my left screen, which is
+vertical. The SAC window is too wide for the vertical screen and too tall for
+the neighboring horizontal screen. When I drag to horizontal screen and attempt
+to resize x11 window I get this error -->
+
+ ERROR  901: SAC programming logic error : Window resized during PPK
+ 	 Exiting from PPK because picks are inaccurate after resize.
+	 	  Window resizing must be done before entering PPK.
+ ERROR 1016: Terminating execution of macro doppk
+ Command line is: ppk perplot 2
+
+Solution as of now: slide window back and forth across screens to get full
+view, though I find it really frustrating I cannot ever see the entire X11 in
+one view. I will try to find a solution for this, leading to [3]
+
+[3] Default X11 window:
+
+Spent an hour+ googling and playing with setting the $DISPLAY to try to get x11
+to open in my horizontal screen with proper dimensions. No dice; maybe someone
+else knows a simple solution (I know it exists I just can't figure it out).
+
+One tip: DO NOT check the box under X11 Preferences > Output > "Full-screen
+mode." That turns of your screens into a useless black box with nothing on that
+you cannot close.
+
+<< gave up and started picking >>
+
+[4] Where are AIC picks on MERMAID in 2018/20180928/DATA/Q00 (maybe they are so
+late they are off screen...I didn't check), because for some other events the
+AIC pick is on the waveform.
+
+[5] I repeated an event and after the repeat it did not ask me to specify a
+time bias -- I just hit enter after "r" to repeat, and then when it was done it
+closed the program without again asking me to specify. Is the idea, then, that I
+would add expected time biases individually in the "add_to_datafile"
+
+[6] 20211214, e.g., Wake: As you write in your notes, I also I don't know if I'm
+picking P or pP around 548 s. Now this is a case I would NOT apply a time bias
+based on the STF (time bias is to account for ISC picking foreshock?)?  I need a
+refresher on how/when to apply a time bias (and individual vs. collective).
+
+    And do we trust the polarity? DZM should be down. I see up...(oh, I see you
+    write the same thing in your notes).
+
+    Reading the STF: do we call it/worry about a foreshock if the first pulse of
+    energy is not large/the largest, e.g., 20190412?  And if so, remind me: we
+    want to pick the MAIN shock and then add a time bias for the foreshock? (I
+    know I'm repeating myself/questions).
+
+[7] Random note: adds EXIT after the current event regardless of if you have
+actually done it; i.e., if you run pnext and quit the program before picking
+pnext will skip it next time you run it. Something to be aware of.
+
+[8] Other random note: I found inconsistencies in questions about tbias depending
+on how 
+
+[9] When you say you reject an event, does that mean you make no picks? (or if
+you did make picks, you will delete the files and/or repeat event and not make
+any picks?) -- I just kept all picks for this exercise.
+
+[10] "reject since only MERMAID did not allow picking" -- is this something we
+need to be careful about or will your inversion be smart enough to identify
+events with no unique (MERMAID) data stream?
+
+[11] Inconsistency/confused with pnext: if I hit RETURN/ENTER to this question
+(so I don't type "n" "t" or "r") --
+
+"[n]ext event, give nonzero [t]bias, or [r]epeat?"
+
+I then get this question:
+
+"Give tbias for rdapf2, or 0: "
+
+and then the next event is queued up.
+
+BUT, if instead I hit "n" to first question, the second question does not appear
+and the program closes and I must run pnext again.
+
+And furthermore, since pnext is still running in the background I suppose, no
+add_to_datafile or out.pointa are written to (until pnext finishes, I'd guess)?
+I struggled with this happening and having to redo events a lot.
+
+Oh..returning to this question. It seems that if you don't answer the question
+the default is to repeat the same event?l
+
+[12]  Added nonzero time bias to file and not sure 
+
+Outstanding questions I need to figure out:
+
+Make sure time bias properly written to "add_to..." file. I responded to
+question with 2 but I don't think it was properly written?
+
+[13] "20190122 - stf seems OK, good for hp. P06 is near nodal plane, on hp F
+picks it slightly late. Residu plot OK. Accept." I cannot for the life of me see
+an arrival here.
+
+[14] "M53 onset is visible after F, just before pP, on the unfiltered
+record. Accept." How? I do not see anything.
+
+What I need:
+
+* I would love to run through all these examples with you on Zoom.
+* I need help/tips formatting X11 so it fits on my screen.
+* I need a refresher on time bias; when/how to apply.
+* I need someone to watch me run though pnext w/, w/o adding tbias and seeing
+  it's written correctly (inconstancy question above; if you respond or not to
+  questions after picks).
+  
+END
+

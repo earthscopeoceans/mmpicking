@@ -1,0 +1,19 @@
+April 14
+
+Guust Nolet
+
+I also attach a slightly modified version OF dopick. It avoids going
+into repeat mode if you type an unknown character by accident, which
+happened to me twice... Note that if you type <r> for repeat, you only
+have to redo the picks you are unhappy about, since it will still read
+the old ones from the APF file — contrary to what I have perhaps said
+earlier.
+
+One note about the SAC cheat sheet: if you use the SPECTROGRAM command, be aware 
+that it computes spectra over a 2s window, and these windows are 1s apart. You 
+must look at the maxima, not the edges, to find out where a high frequency 
+enters the seismogram, but its precision is 1s at best. In general Joel’s AIC 
+(F)  picks do a better job recognizing the whereabouts of the onset, though in 
+case you suspect F picks pP the spectrogram can come in handy.
+
+

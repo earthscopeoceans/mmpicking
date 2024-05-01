@@ -1,0 +1,103 @@
+3/3/2024
+
+Dear all,
+
+For whatever it is worth, I give here examples of my experience so far
+that may be useful:
+
+20180916/DATA/Q00 has multiple stations near the nodal plane (white on
+sisaz.pdf). The FDSN stations agree with the predictions, so I trust
+sisaz.pdf. FUNA is UP (small) after consulting sisaz.pdf, while P0008
+is DOWN, XMAS is UP (this is only clear on the unfiltered seismogram),
+DZM is unclear and I skipped it.
+
+20180916/DATA/Q01 - Here the danger is the larger signal following the
+small onset after 4s: stf.pdf shows a sudden stop at 4s so I guess
+this is what source people call the stopping phase (see paper by
+Brustle and Muller,1987), which is *not* the one to pick (as the AIC
+pick did in, for example, P0018). However, the stopping phase polarity
+should be the opposite of the onset's polarity, and this is very
+useful information. The time difference between the two on the
+seismogram will depend on the rupture length and station azimuth and
+is generally not 4s. Note the almost invisible first second on the
+stf, which is likely to cause mispicks, so I assign a 1 sec error to
+all when calling rdapf2.  For the weak onset, XMAS agrees with
+predicted polarity, but JOHN does not, like WAKE it has an
+upswing. Here I trust only the predictions at the centre of the
+blue/red areas. For example, PPTF seems to have an UP onset, but is
+predicted to be down. Nearby P0025 also has a weak upswing identified
+by F, one could accept that but give it a 1 sec uncertainty (editing
+the add_to file). I rejected P0021 as too ambiguous: a downswing on
+the high-pass that is invisible on the unfiltered record except for
+the AIC algorithm. In P0015,16,17 I hesitate to pick an onset but this
+is up for debate, as the small onset seems identical in all three.
+The stopping phase is weaker than the onset in the stations closest to
+the event (MSVF,P0008) where there is a high amplitude oscillating
+wave of duration 3-4s following the onset.
+
+20180810/DATA/Q02: This is one of those magnitude 5 events from
+Tonga/Kermadec that often pose lots of problems. AIC picks a
+questionable onset at 43.1s in P0006, but the standard window created
+by doppk does not allow to judge the pre-Pn noise. In such case I
+create a second terminal window to view that noise, which shows onset
+should be readable.  In P0006 pPn arrives near predicted time, but Pn
+is about 4s early if F is correct.  I suspect it arrives even 1 sec
+earlier than F, with a downswing as it does in P0007 which shows no
+fast mantle. The P onset in HNR may about where Pn is predicted but
+here there are many similar swings before P so I reject it.
+
+20190612/DATA/Q00: shallow events, even close and magnitude 5 may be
+difficult to pick. This event is an example that I reject out of hand
+as being too unreliable to pick, even though AIC detected something.
+
+Other advice:
+
+If there are no (or no pickable) FDSN data, reject the event if fewer
+than 3 Mermaids recorded the event, since for the inversion I will
+only accept events with at least 3 picks (to allow for the origin time
+to be adjusted). This is only the case for the weaker events, of which
+the hypocentre may not be very reliable anyway.
+
+If pre-P noise has the same character as the coda signal after P, pick
+only if the P onset is clear and unambiguous.
+
+Be careful with polarity comparisons: - check if the FDSN stations
+satisfy the blue/red prediction - small P wave arrivals may have the
+opposite polarity of the noise peak that carries them, check if
+similar little wiggles exist elsewhere and if so, reject because the
+wiggle may not be the P wave arrival.
+
+If you pick the onset from the (top) high-passed record, SAC will not
+save the pick (A) in the header, I have not yet found out how to fix
+that, I guess it can be done using 'blackboard' variables. However,
+this is just annoying, nothing serious.
+
+The subdivision of records into some 3000 subdirectories (Qnn
+directories on the same date) was done automatically, and has
+occasionally dumped records in different directories that should be
+combined. This happened whenever there were ambiguities in the event
+(I suspect related to the fact that data from different groups came in
+piece-wise). For example, November 30, 2020, has 20201130/DATA/Q00 to
+Q05, but those are only two different events, very close in time but
+one in Tonga and one in Japan. You may need to recombine records using
+common sense, but it may be ambiguous which event it really was. In
+that case simply reject.
+
+I wrote a handy script <dopick> that you can run from the home
+directory to do not only the picking but also the post-processing with
+rdapf2. It allows you to repeat the picking once. I find that often
+useful, because one learns about the event during picking, and may
+wish to revise or add pick. The repeat also allows you to call rdap2
+with a bias (in case you decide to ignore a small foreshock).  One
+calls it from the home directory with the event directory as argument,
+e.g.:
+
+dopick 20180823/DATA/Q00
+
+Also, I added SAC’s ‘quit’ command to mkdoppk, so you don not have to
+type that yourself.
+
+Best wishes,
+
+Guust
+

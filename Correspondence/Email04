@@ -1,0 +1,36 @@
+2/10/2024
+
+Dear All,
+
+If there are no island stations (*.SAC) in a subdirectory such as Q00/
+it is either because there are not good ones (low Mw, low S/N), or
+because the seismograms contain PKP only. 
+
+For now we are not picking PKP so just skip those.
+
+I noticed that, for shallow quakes, it is sometimes much easier to
+pick the pP wave than the P wave. If you pick only pP, the solution is
+simple, because all you then need to do is type ‘pP’ instead of ‘P’
+when you run rdapf2 (e.g.: rdapf2 pP 0.3).
+
+However, if for some event you wish to pick P from some seismograms
+and pP from others (or both P and pP), proceed as follows:
+
+[1] Create a second directory, eg ../Q01a/ if you are in Q01/: mkdir
+../Q01a
+
+[2] Copy out.cfneic, quake, and the pP seismograms from Q01/ to
+Q01a/,eg: cp out.cfneic quake *.sac *.SAC ../Q01a
+
+[3] Pick P from Q01/ as usual
+
+[4] Pick pP from Q01a/ and run rdapf2 with ‘pP’ instead of ‘P’
+
+In case you feel very energetic and you wish to pick pP also from
+deeper quakes for which pP falls outside of the plot: you must change
+the 'xlim t0 -6 t0 +10’ line in doppk and replace the time limits such
+that pP is included. Usually, SAC puts the pP arrival in marker t1, so
+you would try ‘xlim t1 -6 t1 +10’ to have it start 6s before and end
+10s after the AK135 predicted time.
+
+Let me know if you have questions!
