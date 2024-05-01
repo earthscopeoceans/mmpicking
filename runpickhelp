@@ -1,5 +1,0 @@
-#! /bin/csh 
-
-set a = `picklist 2*.sac *.SAC`
-pickhelp $a
-
