@@ -35,7 +35,7 @@ program rdapf2
 ! changed your mind and repeated a pick typing "A,L") only the last reading
 ! is used by rdapf2
 ! If the output file add_to_datafile.* exists already, new readings are
-! appended to it (which might lead to duplicate picks in output if you 
+! appended to it (which might lead to duplicate picks in output if you
 ! were not careful and read the same station again!).
 
 ! The origin time is read from the file <quake>. 
@@ -234,6 +234,7 @@ do
   year=kyd/1000
   jday=kyd-1000*year
   iotime0=hour*10000+minute*100+sec
+  if(jdebug>0) write(13,*) hour,minute,sec,iotime0
   iobs=iobs+1
   if(iobs>2000) stop 'Increase array dimensions, iobs>2000'
   if(ios.ne.0) then

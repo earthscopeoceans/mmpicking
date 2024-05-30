@@ -102,8 +102,8 @@ do m=1,n
   if(nn.le.1) then
     write(6,'(2a,2f8.1,a,3i6,a)') kstnm(m),' t0,beg=', &
       t0(m),beg(m),' i1,i2,nn=',i2,i2,nn,' failed'
-  else
-    write(6,'(2a,1x,i6,a)') kstnm(m),trim(dumf),nn,' samples'
+! else
+!   write(6,'(2a,1x,i6,a)') kstnm(m),trim(dumf),nn,' samples'
   endif  
   x=-0.5*tlen
   do i=1,nn

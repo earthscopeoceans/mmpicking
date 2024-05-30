@@ -1,14 +1,22 @@
 #! /bin/csh
 
+set mybase = `pwd`
+if(! -e ADDTOS) then   # create directory for add_to files
+  mkdir ADDTOS
+  chmod a+w ADDTOS
+  echo Directory ADDTOS was created in $mybase
+endif  
 echo ' '
 echo '------------------------------------------------------------'  
 echo Running PPK on             $argv[1]
+
 cd $argv[1]
 if(-e APF) then
   set a = `ls add_to_datafile.*[0-9] | wc`
   if($a[1]>0) then
     mv add_to_datafile.*[0-9] add_to_datafile.old
     echo Existing add_to file was saved in add_to_datafile.old
+    echo picks are added to APF, new add_to file will also have old picks
   endif
 endif  
 cat quake
@@ -36,17 +44,21 @@ endif
 mkdoppk
 /usr/local/sac/bin/sac doppk
 
-#vi APF
 echo 'end of:'
 pwd
 echo '----------------------------------------------------------------'
-echo -n '[n]ext event, give nonzero [t]bias, or [r]epeat? '
+echo -n '[n]ext event, re[j]ect this event, give nonzero [t]bias, or [r]epeat? '
 set ans = $<:q
 if ($ans == 'n') then
   rdapf2 P 0.4 
   vi add_to_datafile*[0-9]
   pointa
   pltres add_to_datafile*[0-9]
+  cp add_to_datafile*[0-9] ${mybase}/ADDTOS
+  exit
+else if($ans == 'j') then
+  rm -f add_to_datafile*[0-9]
+  rm -f APF*
   exit
 else if($ans == 't') then
   echo -n 'Give tbias for rdapf2: '
@@ -55,19 +67,20 @@ else if($ans == 't') then
   vi add_to_datafile*
   pointa
   pltres add_to_datafile*[0-9]
+  cp add_to_datafile*[0-9] ${mybase}/ADDTOS
   exit
 else if($ans == 'r') then
   echo -n 'Give tbias for rdapf2, or 0: '
   set tbias = $<:q
   rdapf2 P 0.4 $tbias
   pointa
-  rm add_to*
+  rm add_to*[0-9]
   /usr/local/sac/bin/sac doppk
-  # vi APF
   rdapf2 P 0.4 $tbias
   vi add_to_datafile*[0-9]
   pointa
   pltres add_to_datafile*[0-9]
+  cp add_to_datafile*[0-9] ${mybase}/ADDTOS
   echo 'end of:'
   pwd
   echo '----------------------------------------------------------------'
@@ -82,17 +95,22 @@ else
     vi add_to_datafile*[0-9]
     pointa
     pltres add_to_datafile*[0-9]
+    cp add_to_datafile*[0-9] ${mybase}/ADDTOS
+    exit
+  else if($ans == 'j') then
+    rm -f add_to_datafile*[0-9]
+    rm -f APF*
     exit
   else if($ans == 'r') then
     echo -n 'Give tbias for rdapf2, or 0: '
     set tbias = $<:q
     rm add_to*
     /usr/local/sac/bin/sac doppk
-    # vi APF
     rdapf2 P 0.4 $tbias
     vi add_to_datafile*[0-9]
     pointa
     pltres add_to_datafile*[0-9]
+    cp add_to_datafile*[0-9] ${mybase}/ADDTOS
     echo 'end of:'
     pwd
     echo '----------------------------------------------------------------'
@@ -103,5 +121,6 @@ else
     vi add_to_datafile*[0-9]
     pointa
     pltres add_to_datafile*[0-9]
+    cp add_to_datafile*[0-9] ${mybase}/ADDTOS
   endif  
 endif  

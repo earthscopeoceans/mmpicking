@@ -33,7 +33,15 @@ do
 enddo
 read(1,'(a)',iostat=ios) line
 if(is_iostat_end(ios)) stop
-if(line(1:4).ne.'exit') stop 'exit error'
+if(line(1:4).ne.'exit') then
+  print *,'It seems the file rundopicks is corrupted'
+  print *,'Before the first picking it should only have lines <dopick...>'
+  print *,'After that there are lines <#dopick> at the start'
+  print *,'Followed by a line <dopick>, withb the last picked event'
+  print *, 'then one line simply saying <exit>'
+  print *,'The rest should be lines <dopick>, if any.'
+  stop 'rundopicks error - please fix file by hand'
+endif  
 
 10 read(1,'(a)',iostat=ios) line
 if(is_iostat_end(ios)) stop
@@ -47,8 +55,8 @@ do
 enddo
 close(1)
 close(2)
-close(3)
 
+call system('chmod a+x dumpnxt')
 call system('mv dumpnxt '//trim(fname) )
 call system('chmod a+x '//trim(fname) )
 call system('./'//trim(fname) )
