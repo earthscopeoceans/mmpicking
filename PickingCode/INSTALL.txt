@@ -1,0 +1,32 @@
+[1] Create a base directory from which you shall be working, e.g.:
+mkdir ~/SPPIM
+
+[2] Move Install.tar into the base directory and untar:  tar -xvf Install.tar
+
+
+[3] Find out where on your system the SAC library is located. It probably is in
+/usr/local/sac/lib/libsacio.a or if you have a Mac with the new processor it may be
+in /usr/local/lib/libsacio_bsd.a (type echo $SACHOME to find out where SAC resides).
+If you do not have SAC, get it from your system manager or download it yourself from https://ds.iris.edu/ds/nodes/dmc/software/downloads/sac/ (you must register).
+
+[4] If your SAC library is *not* in /usr/local/sac/lib/libsacio.a you must edit
+the script Compile_all and replace the reference to sacio with the one on your
+system.
+
+[5] If your system does not have gfortran as a compiler, edit script Compile_all
+to use your preferred compiler, or download gfortran from 
+https://fortran-lang.org/learn/os_setup/install_gfortran/
+
+[6] If you do not yet have a directory ~/bin for your executables, create it:
+mkdir ~/bin
+To add it to your $PATH variable. If you use bash add
+export PATH="$PATH:~/bin"
+to .bash_profile. For other systems check which file has the PATH declaration and
+add it in a similar way as other directories.
+
+[7] If you do not yet have GMT version 6, get it from https://www.generic-mapping-tools.org
+
+[8] Finally, go into PickingCode and type:
+./Compile_all
+
+You should be all set! If you encounter difficulties please email me at nolet@princeton.edu
