@@ -20,24 +20,24 @@ if(-e APF) then
   endif
 endif  
 cat quake
-gv smap.pdf
+gv smap.pdf &
 pause
-gv pmap.pdf
+gv pmap.pdf &
 pause
-gv sisaz.pdf
+gv sisaz.pdf &
 pause
-gv pplt1.pdf
+gv pplt1.pdf &
 pause
 if(-e pplt2.pdf) then
-  gv pplt2.pdf
+  gv pplt2.pdf &
   pause
 endif  
 if(-e pplt3.pdf) then
-  gv pplt3.pdf
+  gv pplt3.pdf &
   pause
 endif  
 if(-e stf.pdf) then
-  gv stf.pdf
+  gv stf.pdf &
   endif
 endif  
 
