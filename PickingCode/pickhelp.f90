@@ -144,7 +144,8 @@ if(mod(n,15).ne.0) then
   write(1,'(a)') 'gmt subplot end'
   !write(1,'(a)') 'gmt end show'
   write(1,'(a)') 'gmt end'
-endif  
+endif
+close(1)
 call system('chmod a+x gmtpk')
 call system('gmtpk')
 
