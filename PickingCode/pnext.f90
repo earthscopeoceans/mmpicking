@@ -55,6 +55,7 @@ do
 enddo
 close(1)
 close(2)
+close(3)
 
 call system('chmod a+x dumpnxt')
 call system('mv dumpnxt '//trim(fname) )
