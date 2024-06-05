@@ -51,7 +51,7 @@ write(3,'(a)') ''
 write(3,'(a)') 'gmt end show'
 close(3)
 
-call system('chmod a+x gmtres')
-call system('gmtres')
+call system('chmod a+x ./gmtres')
+call system('./gmtres')
 
 end
