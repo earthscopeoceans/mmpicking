@@ -22,10 +22,6 @@ real*4 :: x,gcarc(100),tpred,evdp(100)
 
 
 open(1,file='APF',action='read')
-open(2,file='/Users/auguste/data/Mermaids/SPPIM/af.xy',access='append')
-open(3,file='/Users/auguste/data/Mermaids/SPPIM/out.pointa',access='append')
-open(4,file='/Users/auguste/data/Mermaids/SPPIM/ddf.xy',access='append')
-!write(3,'(a)') 'kstnm      gcarc      ta      tf     dta     dtf  filename'
 k=0
 tf=-12345.
 ta=-12345.
@@ -73,22 +69,5 @@ do
   call wsac0(fname(k),x,y,nerr)
 enddo  
 k=k-1
-
-do j=1,k  
-  if(ta(j)<0.) cycle
-  tpred=Ptime(gcarc(j),evdp(j))
-  if(tf(j)>0.) then
-    write(2,'(2f8.2)') ta(j)-tpred,tf(j)-tpred
-    write(3,'(a8,5f8.2,2x,a)') kstnm(j),gcarc(j),ta(j),tf(j),ta(j)-tpred, &
-      tf(j)-tpred,trim(fname(j))
-    write(4,'(2f8.2)') evdp(j),tf(j)-ta(j)
-  else  
-    write(3,'(a8,3f8.2,18x,a)') kstnm(j),gcarc(j),ta(j),ta(j)-tpred, &
-      trim(fname(j))
-  endif
-enddo
-
-close(2)
-close(3)
 
 end
