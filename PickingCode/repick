@@ -1,0 +1,163 @@
+#! /bin/csh 
+
+alias GV 'open -a "Preview"'
+alias SC /usr/local/sac/bin/sac
+# or:
+# alias GV /usr/bin/ghostscript
+
+if($#argv<1) then
+  echo "Usage: repick qnnfile (from the base directory)"
+  echo "e.g. repick 2018/20181205/DATA/Q01"
+  exit
+endif  
+
+if(-e quake) then
+  echo "You do not seem to be in your base directory"
+  echo "Usage: repick qnnfile (from the base directory)"
+  echo "e.g. repick 2018/20181205/DATA/Q01"
+  exit
+endif  
+
+if(! -e rundopicks) then
+  echo "You do not seem to be in your base directory"
+  echo "Usage: repick qnnfile (from the base directory)"
+  echo "e.g. repick 2018/20181205/DATA/Q01"
+  exit
+endif  
+
+echo "Older picks are erased by repick - you must pick them again"
+echo "Do you agree to erase them (y/n)?"
+set ans = $<:q
+if($ans == 'y') then
+  echo OK
+else
+  exit
+endif  
+
+set mybase = `pwd`
+
+if(! -e ADDTOS) then   # create directory for add_to files
+  mkdir ADDTOS
+  chmod a+w ADDTOS
+  echo Directory ADDTOS was created in $mybase
+endif  
+echo ' '
+echo '------------------------------------------------------------'  
+
+cd $argv[1]
+
+if(-e quake) then
+  echo Running PPK on $argv[1]
+else
+  echo "You seem not to be in a Qnn directory, quake file absent"
+  echo "Abandoning repick"
+  exit
+endif  
+
+rm -f add_to_datafile*
+rm -f APF*
+
+cat quake
+GV smap.pdf &
+pause
+GV pmap.pdf &
+pause
+GV sisaz.pdf &
+pause
+GV pplt1.pdf &
+pause
+if(-e pplt2.pdf) then
+  GV pplt2.pdf &
+  pause
+endif  
+if(-e pplt3.pdf) then
+  GV pplt3.pdf &
+  pause
+endif  
+if(-e stf.pdf) then
+  GV stf.pdf &
+  endif
+endif  
+
+mkdoppk
+SC doppk
+
+echo 'end of:'
+pwd
+echo '----------------------------------------------------------------'
+echo -n '[n]ext event, re[j]ect this event, give nonzero [t]bias, or [r]epeat? '
+set ans = $<:q
+if ($ans == 'n') then
+  rdapf2 P 0.4 
+  vi add_to_datafile*[0-9]
+  pointa
+  pltres add_to_datafile*[0-9]
+  cp add_to_datafile*[0-9] ${mybase}/ADDTOS
+  exit
+else if($ans == 'j') then
+  rm -f add_to_datafile*[0-9]
+  rm -f APF*
+  exit
+else if($ans == 't') then
+  echo -n 'Give tbias for rdapf2: '
+  set tbias = $<:q
+  rdapf2 P 0.4 $tbias
+  vi add_to_datafile*
+  pointa
+  pltres add_to_datafile*[0-9]
+  cp add_to_datafile*[0-9] ${mybase}/ADDTOS
+  exit
+else if($ans == 'r') then
+  echo -n 'Give tbias for rdapf2, or 0: '
+  set tbias = $<:q
+  rdapf2 P 0.4 $tbias
+  pointa
+  rm add_to*[0-9]
+  SC doppk
+  rdapf2 P 0.4 $tbias
+  vi add_to_datafile*[0-9]
+  pointa
+  pltres add_to_datafile*[0-9]
+  cp add_to_datafile*[0-9] ${mybase}/ADDTOS
+  echo 'end of:'
+  pwd
+  echo '----------------------------------------------------------------'
+else  
+  echo -n 'You must answer either n,j,t or r, so please try again:'
+  set ans = $<:q
+  echo your answer is $ans
+  if($ans == 't') then
+    echo -n 'Give tbias for rdapf2: '
+    set tbias = $<:q
+    rdapf2 P 0.4 $tbias
+    vi add_to_datafile*[0-9]
+    pointa
+    pltres add_to_datafile*[0-9]
+    cp add_to_datafile*[0-9] ${mybase}/ADDTOS
+    exit
+  else if($ans == 'j') then
+    rm -f add_to_datafile*[0-9]
+    rm -f APF*
+    exit
+  else if($ans == 'r') then
+    echo -n 'Give tbias for rdapf2, or 0: '
+    set tbias = $<:q
+    rm add_to*
+    SC doppk
+    rdapf2 P 0.4 $tbias
+    vi add_to_datafile*[0-9]
+    pointa
+    pltres add_to_datafile*[0-9]
+    cp add_to_datafile*[0-9] ${mybase}/ADDTOS
+    echo 'end of:'
+    pwd
+    echo '----------------------------------------------------------------'
+    exit
+  else
+    rdapf2 P 0.4 
+    vi add_to_datafile*[0-9]
+    pointa
+    pltres add_to_datafile*[0-9]
+    cp add_to_datafile*[0-9] ${mybase}/ADDTOS
+  endif  
+endif  
