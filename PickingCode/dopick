@@ -1,6 +1,35 @@
-#! /bin/csh
+#! /bin/tcsh 
+
+alias GV 'open -a "Preview"'            # works on Mac
+alias SC /usr/local/sac/bin/sac
+# type <which ghostview> or <which sac> to find them on your machine
+# alternatives:
+# alias SC /opt/linux64/kernel2.6.32/soft_sismo/sac/bin/sac
+# alias GV /usr/bin/evince
+# alias GV /usr/bin/ghostview
+
+if($#argv<1) then
+  echo "Usage: dopick qnnfile (from the base directory)"
+  echo "e.g. dopick 2018/20181205/DATA/Q01"
+  exit
+endif  
+
+if(-e quake) then
+  echo "You do not seem to be in your base directory"
+  echo "Usage: dopick qnnfile (from the base directory)"
+  echo "e.g. dopick 2018/20181205/DATA/Q01"
+  exit
+endif  
+
+if(! -e rundopicks) then
+  echo "You do not seem to be in your base directory"
+  echo "Usage: dopick qnnfile (from the base directory)"
+  echo "e.g. dopick 2018/20181205/DATA/Q01"
+  exit
+endif  
 
 set mybase = `pwd`
+
 if(! -e ADDTOS) then   # create directory for add_to files
   mkdir ADDTOS
   chmod a+w ADDTOS
@@ -8,6 +37,7 @@ if(! -e ADDTOS) then   # create directory for add_to files
 endif  
 echo ' '
 echo '------------------------------------------------------------'  
+
 echo Running PPK on             $argv[1]
 
 cd $argv[1]
@@ -20,29 +50,29 @@ if(-e APF) then
   endif
 endif  
 cat quake
-gv smap.pdf &
+GV smap.pdf &
 pause
-gv pmap.pdf &
+GV pmap.pdf &
 pause
-gv sisaz.pdf &
+GV sisaz.pdf &
 pause
-gv pplt1.pdf &
+GV pplt1.pdf &
 pause
 if(-e pplt2.pdf) then
-  gv pplt2.pdf &
+  GV pplt2.pdf &
   pause
 endif  
 if(-e pplt3.pdf) then
-  gv pplt3.pdf &
+  GV pplt3.pdf &
   pause
 endif  
 if(-e stf.pdf) then
-  gv stf.pdf &
+  GV stf.pdf &
   endif
 endif  
 
 mkdoppk
-/usr/local/sac/bin/sac doppk
+SC doppk
 
 echo 'end of:'
 pwd
@@ -50,11 +80,13 @@ echo '----------------------------------------------------------------'
 echo -n '[n]ext event, re[j]ect this event, give nonzero [t]bias, or [r]epeat? '
 set ans = $<:q
 if ($ans == 'n') then
+  echo calling rdapf2
   rdapf2 P 0.4 
   vi add_to_datafile*[0-9]
   pointa
   pltres add_to_datafile*[0-9]
   cp add_to_datafile*[0-9] ${mybase}/ADDTOS
+  echo add_to file was copied to ${mybase}/ADDTOS
   exit
 else if($ans == 'j') then
   rm -f add_to_datafile*[0-9]
@@ -75,7 +107,7 @@ else if($ans == 'r') then
   rdapf2 P 0.4 $tbias
   pointa
   rm add_to*[0-9]
-  /usr/local/sac/bin/sac doppk
+  SC doppk
   rdapf2 P 0.4 $tbias
   vi add_to_datafile*[0-9]
   pointa
@@ -85,7 +117,7 @@ else if($ans == 'r') then
   pwd
   echo '----------------------------------------------------------------'
 else  
-  echo -n 'You must answer either n,t or r, so please try again:'
+  echo -n 'You must answer either n,j,t or r, so please try again:'
   set ans = $<:q
   echo your answer is $ans
   if($ans == 't') then
@@ -105,7 +137,7 @@ else
     echo -n 'Give tbias for rdapf2, or 0: '
     set tbias = $<:q
     rm add_to*
-    /usr/local/sac/bin/sac doppk
+    SC doppk
     rdapf2 P 0.4 $tbias
     vi add_to_datafile*[0-9]
     pointa
