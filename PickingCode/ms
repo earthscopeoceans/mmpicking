@@ -1,0 +1,8 @@
+xlim t0 -20 t0 +20
+xdiv nice power off
+ydiv nice power on
+xlabel "Time (sec)"
+fileid type list kstnm gcarc 
+qdp off
+r *sac
+p1 rel
