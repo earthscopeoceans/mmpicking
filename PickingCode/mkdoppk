@@ -1,6 +1,17 @@
 #!/bin/csh 
 
-# creates sac macro doppk for ppk calls 
+# creates SAC macro doppk for PPK calls 
+
+# exit if no GSN records survived
+ls > dum
+grep SAC dum > dum1
+set a = `wc dum1`
+if($a[1] == 0) then
+  echo Abandon picking of this event for lack of good island stations
+  touch abandoned
+  echo quit > doppk
+  exit
+endif  
 
 set jul = `head -1 quake`
 @ year = $jul[1]
