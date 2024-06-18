@@ -1,0 +1,19 @@
+#! /bin/tcsh
+
+if($#argv<1) then
+  echo Usage: g2 Qnn directory
+  echo e.g. g2 2021/20210304/DATA/Q07
+  exit
+endif
+
+if(-e $HOME/SPPIM/$argv[1]) then
+  echo processing $HOME/SPPIM/$argv[1]
+else
+  echo $HOME/SPPIM/$argv[1] cannot be found
+  exit
+endif  
+
+cd $HOME/SPPIM/$argv[1]
+cp $HOME/ms .
+
+/usr/local/sac/bin/sac ms
