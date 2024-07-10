@@ -10,15 +10,15 @@ program pointa
 use ttak135
 
 implicit none
-integer, parameter :: NSAC=100000
-character :: fname(100)*80,loc*3,kstnm(100)*8
+integer, parameter :: NSAC=100000, MXK=900
+character :: fname(MXK)*80,loc*3,kstnm(MXK)*8
 integer :: nzyear,nzjday,nzhour,nzmin,nzsec,nzmsec
 integer :: pkyear,pkjday,pkhour,pkmin,pksec,pkmsec
 integer :: i,j,k,ios,nerr,yearday,npts
 integer :: t0(6),tp(6)
 real*8 :: timediff
-real*4 :: ta(100),y(NSAC),beg,dt,sec,tf(100)
-real*4 :: x,gcarc(100),tpred,evdp(100)
+real*4 :: ta(MXK),y(NSAC),beg,dt,sec,tf(MXK)
+real*4 :: x,gcarc(MXK),tpred,evdp(MXK)
 
 
 open(1,file='APF',action='read')
@@ -27,7 +27,7 @@ tf=-12345.
 ta=-12345.
 do 
   k=k+1
-  if(k>100) stop 'k>100'
+  if(k>MXK) stop 'k>MXK'
   read(1,*,iostat=ios) fname(k),loc,yearday,tp(3),tp(4),sec
   if(is_iostat_end(ios)) exit
   tp(5)=sec
